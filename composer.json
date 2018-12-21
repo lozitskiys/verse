@@ -2,7 +2,7 @@
     "name": "lozitskiys/verse",
     "description": "Decorator based nano PHP framework",
     "type": "library",
-    "license": "Apache License 2.0",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "lozitskiys",
