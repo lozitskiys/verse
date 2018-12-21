@@ -1,2 +1,2 @@
 # verse
-Selfmade nano PHP framework
+Decorator based nanoPHP framework
