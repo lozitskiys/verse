@@ -6,8 +6,10 @@
     "authors": [
         {
             "name": "lozitskiys",
-            "email": "lozitskiys@gmail.com"
+            "email": "lozitskiy.s@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^7.2"
+    }
 }
