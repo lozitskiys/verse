@@ -6,6 +6,11 @@ use Verse\Action;
 use Verse\App;
 use Verse\Env;
 
+/**
+ * Application with session support.
+ *
+ * AppStd decorator.
+ */
 class AppSession implements App
 {
     private $app;

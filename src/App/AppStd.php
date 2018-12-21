@@ -6,6 +6,11 @@ use Verse\Action;
 use Verse\App;
 use Verse\Env;
 
+/**
+ * Base application.
+ *
+ * Project entry point.
+ */
 class AppStd implements App
 {
     public function start(Action $action, Env $env): void

@@ -6,6 +6,11 @@ use Verse\Action;
 use Verse\App;
 use Verse\Env;
 
+/**
+ * Application with timezone configured.
+ *
+ * AppStd decorator.
+ */
 class AppLocaleAndTz implements App
 {
     private $app;

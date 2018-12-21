@@ -1,6 +1,10 @@
 {
     "name": "lozitskiys/verse",
     "description": "Decorator based nano PHP framework",
+    "keywords": [
+        "framework",
+        "php"
+    ],
     "type": "library",
     "license": "Apache-2.0",
     "authors": [

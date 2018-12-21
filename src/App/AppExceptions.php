@@ -7,6 +7,11 @@ use Verse\App;
 use Verse\Env;
 use Verse\Error\RouteNotFoundException;
 
+/**
+ * Application with caught exceptions and type errors.
+ *
+ * AppStd decorator.
+ */
 class AppExceptions implements App
 {
     private $app;
