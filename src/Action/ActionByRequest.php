@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Action;
+namespace Verse\Action;
 
 use Verse\Action;
 use Verse\Env;

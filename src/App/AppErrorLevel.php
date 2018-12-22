@@ -6,6 +6,9 @@ use Verse\Action;
 use Verse\App;
 use Verse\Env;
 
+/**
+ * AppStd decorator.
+ */
 class AppErrorLevel implements App
 {
     private $app;
