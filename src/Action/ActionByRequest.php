@@ -2,6 +2,7 @@
 
 namespace Verse\Action;
 
+use Verse\Route\RouteList;
 use Verse\Action;
 use Verse\Env;
 use Verse\Error\RouteNotFoundException;
@@ -9,15 +10,15 @@ use Verse\Response;
 
 class ActionByRequest implements Action
 {
-    private $routes;
-    private $requestUri;
-    private $env;
+    private $routeList;
+    private $httpMethod;
+    private $uri;
 
-    public function __construct(array $routes, string $requestUri, Env $env)
+    public function __construct(RouteList $routeList, string $httpMethod, string $uri)
     {
-        $this->routes = $routes;
-        $this->requestUri = $requestUri;
-        $this->env = $env;
+        $this->routeList = $routeList;
+        $this->httpMethod = $httpMethod;
+        $this->uri = $uri;
     }
 
     /**
@@ -36,22 +37,34 @@ class ActionByRequest implements Action
      */
     private function action(): Action
     {
-        $url = parse_url($this->requestUri);
+        $url = parse_url($this->uri);
 
-        $path = rtrim($url['path'], ' \/');
-
-        if (!isset($this->routes[$path])) {
-            throw new RouteNotFoundException("Route not found");
+        $path = trim($url['path']);
+        if ('/' !== $path) {
+            $path = rtrim($url['path'], ' \/');
         }
 
+        $httpMethod = strtoupper($this->httpMethod);
+
+        foreach ($this->routeList as $route) {
+            if ($path === $route->path() && $httpMethod === $route->method()) {
+                return $this->actionInstance($route->action());
+            }
+        }
+
+        throw new RouteNotFoundException("Route $httpMethod:$path not found");
+    }
+
+    private function actionInstance(string $actionPath): Action
+    {
         $className = 'Actions';
 
-        if (false !== strpos($this->routes[$path], '/')) {
-            foreach (explode('/', $this->routes[$path]) as $subDir) {
+        if (false !== strpos($actionPath, '/')) {
+            foreach (explode('/', $actionPath) as $subDir) {
                 $className .= '\\' . $subDir;
             }
         } else {
-            $className .= '\\' . $this->routes[$path];
+            $className .= '\\' . $actionPath;
         }
 
         return new $className;
