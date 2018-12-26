@@ -3,30 +3,30 @@
 namespace Verse\Env;
 
 use Verse\Env;
-use Verse\Service;
+use Verse\Services;
 
 class EnvStd implements Env
 {
     private $siteRoot;
     private $debug;
     private $defDisplayErrorsMethod;
-    private $service;
+    private $services;
 
     public function __construct(
         string $siteRoot,
         bool $debug,
         string $defDisplayErrorsMethod,
-        Service $service
+        Services $services
     ) {
         $this->siteRoot = $siteRoot;
         $this->debug = $debug;
         $this->defDisplayErrorsMethod = $defDisplayErrorsMethod;
-        $this->service = $service;
+        $this->services = $services;
     }
 
-    public function service(): Service
+    public function srv(): Services
     {
-        return $this->service;
+        return $this->services;
     }
 
     public function siteRoot(): string

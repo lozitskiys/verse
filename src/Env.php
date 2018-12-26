@@ -9,7 +9,7 @@ namespace Verse;
  */
 interface Env
 {
-    function service(): Service;
+    function srv(): Services;
 
     function siteRoot(): string;
 

@@ -2,10 +2,10 @@
 
 namespace Verse\Service;
 
-use Verse\Service;
+use Verse\Services;
 use Verse\TemplateRenderer;
 
-class ServiceStd implements Service
+class ServicesStd implements Services
 {
     private $container;
     private $instances = [];
@@ -28,7 +28,7 @@ class ServiceStd implements Service
      * @return TemplateRenderer
      * @throws \Exception
      */
-    public function template(): TemplateRenderer
+    public function tpl(): TemplateRenderer
     {
         return $this->instance('template');
     }
