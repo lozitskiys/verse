@@ -7,6 +7,7 @@ use Verse\Action;
 use Verse\Env;
 use Verse\Error\RouteNotFoundException;
 use Verse\Response;
+use Verse\User;
 
 class ActionByRequest implements Action
 {
@@ -23,12 +24,13 @@ class ActionByRequest implements Action
 
     /**
      * @param Env $env
+     * @param User $user
      * @return Response
      * @throws RouteNotFoundException
      */
-    public function run(Env $env): Response
+    public function run(Env $env, User $user): Response
     {
-        return $this->action()->run($env);
+        return $this->action()->run($env, $user);
     }
 
     /**
