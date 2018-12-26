@@ -1,5 +1,5 @@
 # verse
-Decorator based nano PHP framework
+Decorator based PHP nano framework
 
 ### Key features
 
