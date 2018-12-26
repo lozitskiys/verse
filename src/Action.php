@@ -4,5 +4,5 @@ namespace Verse;
 
 interface Action
 {
-    function run(Env $env): Response;
+    function run(Env $env, User $user): Response;
 }

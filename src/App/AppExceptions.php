@@ -6,6 +6,7 @@ use Verse\Action;
 use Verse\App;
 use Verse\Env;
 use Verse\Error\RouteNotFoundException;
+use Verse\User;
 
 /**
  * Application with caught exceptions and type errors.
@@ -21,10 +22,10 @@ class AppExceptions implements App
         $this->app = $app;
     }
 
-    public function start(Action $action, Env $env): void
+    public function start(Action $action, Env $env, User $user): void
     {
         try {
-            $this->app->start($action, $env);
+            $this->app->start($action, $env, $user);
         } catch (\TypeError $error) {
             $code = 500;
             $errorMsg = $error->getMessage();

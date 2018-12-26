@@ -7,5 +7,5 @@ namespace Verse;
  */
 interface App
 {
-    function start(Action $action, Env $env): void;
+    function start(Action $action, Env $env, User $user): void;
 }

@@ -5,6 +5,7 @@ Decorator based nano PHP framework
 
 - Plain architecture
 - Immutable objects only
-- Explicit instead of implicit (no factories, service locators, etc.)
+- Explicit code (no factories, service locators, etc.)
+- No static functions
 
 TBA

@@ -5,6 +5,7 @@ namespace Verse\App;
 use Verse\Action;
 use Verse\App;
 use Verse\Env;
+use Verse\User;
 
 /**
  * Application with timezone configured.
@@ -20,7 +21,7 @@ class AppLocaleAndTz implements App
         $this->app = $app;
     }
 
-    public function start(Action $action, Env $env): void
+    public function start(Action $action, Env $env, User $user): void
     {
         setlocale(LC_NUMERIC, 'C');
 
@@ -28,6 +29,6 @@ class AppLocaleAndTz implements App
 
         umask(0002);
 
-        $this->app->start($action, $env);
+        $this->app->start($action, $env, $user);
     }
 }
