@@ -2,6 +2,8 @@
 
 namespace Verse;
 
+use Verse\Auth\AuthEncrypted;
+
 /**
  * Services to use in app.
  */
@@ -17,4 +19,8 @@ interface Services
      */
     function tpl(): TemplateRenderer;
 
+    /**
+     * @return AuthEncrypted
+     */
+    function auth(): AuthEncrypted;
 }
