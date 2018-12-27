@@ -2,6 +2,7 @@
 
 namespace Verse\Service;
 
+use Verse\Auth\AuthEncrypted;
 use Verse\Services;
 use Verse\TemplateRenderer;
 
@@ -31,6 +32,15 @@ class ServicesStd implements Services
     public function tpl(): TemplateRenderer
     {
         return $this->instance('template');
+    }
+
+    /**
+     * @return AuthEncrypted
+     * @throws \Exception
+     */
+    public function auth(): AuthEncrypted
+    {
+        return $this->instance('auth');
     }
 
     /**
