@@ -4,14 +4,14 @@ namespace Verse\Response;
 
 use Verse\Response;
 
-class ResponseJson implements Response
+class RespHtml implements Response
 {
     private $result;
     private $headers;
 
-    public function __construct(array $result, array $headers = [])
+    public function __construct(string $result, array $headers = [])
     {
-        $headers[] = 'Content-type: application/json; charset=UTF-8';
+        $headers[] = 'Content-type: text/html; charset=UTF-8';
 
         $this->result = $result;
         $this->headers = $headers;
@@ -19,7 +19,7 @@ class ResponseJson implements Response
 
     public function body(): string
     {
-        return json_encode($this->result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        return $this->result;
     }
 
     public function headers(): array
