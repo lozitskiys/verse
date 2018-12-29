@@ -2,17 +2,10 @@
 
 namespace Verse\Action;
 
-use Verse\Route\RouteList;
-use Verse\Action;
-use Verse\Env;
 use Verse\Error\RouteNotFoundException;
-use Verse\Response;
-use Verse\User;
+use Verse\Route\RouteList;
 
-/**
- * @deprecated use ActionClassByRoute instead
- */
-class ActionByRequest implements Action
+class ActionClassByRoute implements ActionClass
 {
     private $routeList;
     private $httpMethod;
@@ -26,21 +19,10 @@ class ActionByRequest implements Action
     }
 
     /**
-     * @param Env $env
-     * @param User $user
-     * @return Response
+     * @return string
      * @throws RouteNotFoundException
      */
-    public function run(Env $env, User $user): Response
-    {
-        return $this->action()->run($env, $user);
-    }
-
-    /**
-     * @return Action
-     * @throws RouteNotFoundException
-     */
-    private function action(): Action
+    public function className(): string
     {
         $url = parse_url($this->uri);
 
@@ -53,14 +35,14 @@ class ActionByRequest implements Action
 
         foreach ($this->routeList as $route) {
             if ($path === $route->path() && $httpMethod === $route->method()) {
-                return $this->actionInstance($route->action());
+                return $this->classNameByPath($route->action());
             }
         }
 
         throw new RouteNotFoundException("Route $httpMethod:$path not found");
     }
 
-    private function actionInstance(string $actionPath): Action
+    private function classNameByPath(string $actionPath): string
     {
         $className = 'Actions';
 
@@ -72,6 +54,6 @@ class ActionByRequest implements Action
             $className .= '\\' . $actionPath;
         }
 
-        return new $className;
+        return $className;
     }
 }
