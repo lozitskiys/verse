@@ -6,7 +6,7 @@ use Verse\Access\AccessLevel;
 use Verse\Access\GuestAccess;
 use Verse\Action;
 use Verse\Env;
-use Verse\Errors\MustAuthenticateException;
+use Verse\Error\MustAuthenticateException;
 use Verse\Response;
 use Verse\User;
 
