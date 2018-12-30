@@ -52,6 +52,6 @@ class AuthRemembered implements Authorized
 
     public function sessionKey(): string
     {
-        return '';
+        return $this->sessionKey;
     }
 }
