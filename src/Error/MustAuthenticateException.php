@@ -1,6 +1,6 @@
 <?php
 
-namespace Verse\Errors;
+namespace Verse\Error;
 
 class MustAuthenticateException extends \Exception
 {
