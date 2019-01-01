@@ -79,7 +79,7 @@ class RouteByUri implements Route
             if ($this->hasToken($route)) {
                 $uriBeforeToken = substr($route->path(), 0, strpos($route->path(), '{'));
 
-                $pathMatched = 0 === substr($route->path(), $uriBeforeToken);
+                $pathMatched = 0 === strpos($route->path(), $uriBeforeToken);
 
                 if ($pathMatched && $httpMethod === $route->method()) {
                     $this->routeCached = new RouteStd(
