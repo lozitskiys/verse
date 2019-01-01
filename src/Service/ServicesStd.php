@@ -3,6 +3,7 @@
 namespace Verse\Service;
 
 use Verse\Auth\AuthEncrypted;
+use Verse\Route;
 use Verse\Services;
 use Verse\TemplateRenderer;
 
@@ -41,6 +42,15 @@ class ServicesStd implements Services
     public function auth(): AuthEncrypted
     {
         return $this->instance('auth');
+    }
+
+    /**
+     * @return Route
+     * @throws \Exception
+     */
+    public function route(): Route
+    {
+        return $this->instance('route');
     }
 
     /**

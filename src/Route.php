@@ -9,4 +9,6 @@ interface Route
     function method(): string;
 
     function action(): string;
+
+    function token(string $key);
 }

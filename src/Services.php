@@ -23,4 +23,9 @@ interface Services
      * @return AuthEncrypted
      */
     function auth(): AuthEncrypted;
+
+    /**
+     * @return Route
+     */
+    function route(): Route;
 }
