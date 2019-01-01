@@ -76,7 +76,21 @@ class RouteByUri implements Route
         $httpMethod = strtoupper($this->httpMethod);
 
         foreach ($this->routeList as $route) {
-            if ($path === $route->path() && $httpMethod === $route->method()) {
+            if ($this->hasToken($route)) {
+                $uriBeforeToken = substr($route->path(), 0, strpos($route->path(), '{'));
+
+                $pathMatched = 0 === substr($route->path(), $uriBeforeToken);
+
+                if ($pathMatched && $httpMethod === $route->method()) {
+                    $this->routeCached = new RouteStd(
+                        $route->action(),
+                        $route->method(),
+                        $route->path(),
+                        (new RouteTokensStd($route, $this->uri))->list()
+                    );
+                    break;
+                }
+            } elseif ($path === $route->path() && $httpMethod === $route->method()) {
                 $this->routeCached = $route;
                 break;
             }
@@ -87,5 +101,10 @@ class RouteByUri implements Route
         }
 
         return $this->routeCached;
+    }
+
+    private function hasToken(Route $route): bool
+    {
+        return false === strpos($route->path(), '{');
     }
 }
