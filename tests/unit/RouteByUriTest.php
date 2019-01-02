@@ -11,7 +11,7 @@ class RouteByUriTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-    private function routelist(): RouteList
+    private function routeList(): RouteList
     {
         return new class implements RouteList
         {
@@ -34,23 +34,38 @@ class RouteByUriTest extends \Codeception\Test\Unit
                     'GET',
                     '/test3/{tag}/{id}'
                 );
+
+                yield new RouteStd(
+                    'TestAction4',
+                    'GET',
+                    '/test4/{id}'
+                );
             }
         };
     }
 
     public function testRoute()
     {
-        $route = new RouteByUri($this->routelist(), 'GET', '/test2');
+        $route = new RouteByUri($this->routeList(), 'GET', '/test2');
 
         $this->assertEquals('TestAction2', $route->action());
         $this->assertEquals('/test2', $route->path());
         $this->assertEquals('GET', $route->method());
-        //$this->assertEquals('', $route->token());
+    }
+
+    public function testRouteWithToken()
+    {
+        $route = new RouteByUri($this->routeList(), 'GET', '/test4/777');
+
+        $this->assertEquals('TestAction4', $route->action());
+        $this->assertEquals('/test4/{id}', $route->path());
+        $this->assertEquals('GET', $route->method());
+        $this->assertEquals('777', $route->token('id'));
     }
 
     public function testRouteWithTokens()
     {
-        $route = new RouteByUri($this->routelist(), 'GET', '/test3/video/777');
+        $route = new RouteByUri($this->routeList(), 'GET', '/test3/video/777');
 
         $this->assertEquals('TestAction3', $route->action());
         $this->assertEquals('/test3/{tag}/{id}', $route->path());
@@ -58,6 +73,8 @@ class RouteByUriTest extends \Codeception\Test\Unit
         $this->assertEquals('video', $route->token('tag'));
         $this->assertEquals('777', $route->token('id'));
     }
+
+
 
 
 }
