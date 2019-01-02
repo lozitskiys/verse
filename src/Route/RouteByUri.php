@@ -105,6 +105,6 @@ class RouteByUri implements Route
 
     private function hasToken(Route $route): bool
     {
-        return false === strpos($route->path(), '{');
+        return false !== strpos($route->path(), '{');
     }
 }
