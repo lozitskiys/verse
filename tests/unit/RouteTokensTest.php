@@ -1,5 +1,8 @@
 <?php
 
+use Verse\Route\RouteBase;
+use Verse\Route\RouteTokensStd;
+
 class RouteTokensTest extends \Codeception\Test\Unit
 {
     /**
@@ -15,8 +18,8 @@ class RouteTokensTest extends \Codeception\Test\Unit
 
         $this->assertEquals(
             $exp,
-            (new \Verse\Route\RouteTokensStd(
-                new \Verse\Route\RouteBase(
+            (new RouteTokensStd(
+                new RouteBase(
                     'TestAction',
                     'GET',
                     '/wiki/{id}'
@@ -35,8 +38,8 @@ class RouteTokensTest extends \Codeception\Test\Unit
 
         $this->assertEquals(
             $exp,
-            (new \Verse\Route\RouteTokensStd(
-                new \Verse\Route\RouteBase(
+            (new RouteTokensStd(
+                new RouteBase(
                     'TestAction',
                     'GET',
                     '/wiki/{tag}/{id}'
@@ -49,8 +52,8 @@ class RouteTokensTest extends \Codeception\Test\Unit
     public function testTokenWrongPath()
     {
         $call = function () {
-            (new \Verse\Route\RouteTokensStd(
-                new \Verse\Route\RouteBase(
+            (new RouteTokensStd(
+                new RouteBase(
                     'TestAction',
                     'GET',
                     '/wiki/id'
