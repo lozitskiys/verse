@@ -4,7 +4,7 @@ namespace Verse\Route;
 
 use Verse\Route;
 
-class RouteStd implements Route
+class RouteBase implements Route
 {
     private $action;
     private $method;

@@ -16,7 +16,7 @@ class RouteTokensTest extends \Codeception\Test\Unit
         $this->assertEquals(
             $exp,
             (new \Verse\Route\RouteTokensStd(
-                new \Verse\Route\RouteStd(
+                new \Verse\Route\RouteBase(
                     'TestAction',
                     'GET',
                     '/wiki/{id}'
@@ -36,7 +36,7 @@ class RouteTokensTest extends \Codeception\Test\Unit
         $this->assertEquals(
             $exp,
             (new \Verse\Route\RouteTokensStd(
-                new \Verse\Route\RouteStd(
+                new \Verse\Route\RouteBase(
                     'TestAction',
                     'GET',
                     '/wiki/{tag}/{id}'
@@ -50,7 +50,7 @@ class RouteTokensTest extends \Codeception\Test\Unit
     {
         $call = function () {
             (new \Verse\Route\RouteTokensStd(
-                new \Verse\Route\RouteStd(
+                new \Verse\Route\RouteBase(
                     'TestAction',
                     'GET',
                     '/wiki/id'

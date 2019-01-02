@@ -47,7 +47,7 @@ class RouteListFromYaml implements RouteList
                 );
             }
 
-            yield new RouteStd($action, $method, $path);
+            yield new RouteBase($action, $method, $path);
         }
     }
 

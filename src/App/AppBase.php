@@ -12,7 +12,7 @@ use Verse\User;
  *
  * Project entry point.
  */
-class AppStd implements App
+class AppBase implements App
 {
     public function start(Action $action, Env $env, User $user): void
     {

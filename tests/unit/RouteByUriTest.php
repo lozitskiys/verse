@@ -1,7 +1,7 @@
 <?php
 
 use Verse\Route\RouteList;
-use Verse\Route\RouteStd;
+use Verse\Route\RouteBase;
 use Verse\Route\RouteByUri;
 
 class RouteByUriTest extends \Codeception\Test\Unit
@@ -17,25 +17,25 @@ class RouteByUriTest extends \Codeception\Test\Unit
         {
             public function getIterator(): Traversable
             {
-                yield new RouteStd(
+                yield new RouteBase(
                     'TestAction1',
                     'GET',
                     '/test1'
                 );
 
-                yield new RouteStd(
+                yield new RouteBase(
                     'TestAction2',
                     'GET',
                     '/test2'
                 );
 
-                yield new RouteStd(
+                yield new RouteBase(
                     'TestAction3',
                     'GET',
                     '/test3/{tag}/{id}'
                 );
 
-                yield new RouteStd(
+                yield new RouteBase(
                     'TestAction4',
                     'GET',
                     '/test4/{id}'

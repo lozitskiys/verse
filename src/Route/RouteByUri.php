@@ -82,7 +82,7 @@ class RouteByUri implements Route
                 $pathMatched = 0 === strpos($path, $uriBeforeToken);
 
                 if ($pathMatched && $httpMethod === $route->method()) {
-                    $this->routeCached = new RouteStd(
+                    $this->routeCached = new RouteBase(
                         $route->action(),
                         $route->method(),
                         $route->path(),

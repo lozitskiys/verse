@@ -5,7 +5,7 @@ namespace Verse\Env;
 use Verse\Env;
 use Verse\Services;
 
-class EnvStd implements Env
+class EnvBase implements Env
 {
     private $siteRoot;
     private $debug;

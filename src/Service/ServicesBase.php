@@ -7,7 +7,7 @@ use Verse\Route;
 use Verse\Services;
 use Verse\TemplateRenderer;
 
-class ServicesStd implements Services
+class ServicesBase implements Services
 {
     private $container;
     private $instances = [];
