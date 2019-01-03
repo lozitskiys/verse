@@ -7,6 +7,9 @@ use Verse\Env;
 use Verse\Response;
 use Verse\User;
 
+/**
+ * @deprecated
+ */
 class ActionByRoute implements Action
 {
     public function run(Env $env, User $user): Response

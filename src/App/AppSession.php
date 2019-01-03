@@ -10,7 +10,7 @@ use Verse\User;
 /**
  * Application with session support.
  *
- * AppStd decorator.
+ * App decorator.
  */
 class AppSession implements App
 {

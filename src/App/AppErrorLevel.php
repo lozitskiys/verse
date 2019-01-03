@@ -8,7 +8,7 @@ use Verse\Env;
 use Verse\User;
 
 /**
- * AppStd decorator.
+ * App decorator.
  */
 class AppErrorLevel implements App
 {

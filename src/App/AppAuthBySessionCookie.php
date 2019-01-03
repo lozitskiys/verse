@@ -12,7 +12,7 @@ use Verse\User;
 /**
  * Application with authenticated user.
  *
- * AppStd decorator.
+ * App decorator.
  */
 class AppAuthBySessionCookie implements App
 {

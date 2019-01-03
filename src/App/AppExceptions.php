@@ -11,7 +11,7 @@ use Verse\User;
 /**
  * Application with caught exceptions and type errors.
  *
- * AppStd decorator.
+ * App decorator.
  */
 class AppExceptions implements App
 {

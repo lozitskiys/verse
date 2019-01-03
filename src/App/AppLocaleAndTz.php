@@ -10,7 +10,7 @@ use Verse\User;
 /**
  * Application with timezone configured.
  *
- * AppStd decorator.
+ * App decorator.
  */
 class AppLocaleAndTz implements App
 {

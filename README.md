@@ -10,19 +10,48 @@ hard to understand.
 No static functions either.
 - _Composition over inheritance_: No abstract classes and inheritance use.
 
+## Decorator based
+
+Example of index.php:
+```php
+<?php
+
+/** @var \Verse\Env $env */
+$env = require_once __DIR__ . '/../env.php';
+
+$user = new CurrentUser($env->srv()->pdo());
+
+$app = 
+    // App decorator
+    new AppErrorLevel(
+        // App decorator
+        new AppLocaleAndTz(
+            // App decorator
+            new AppSession(
+                // Base App implementation
+                new AppBase()
+            )
+        )
+    );
+
+$action = 
+    // Action decorator
+    new ActionAuthorized(
+        // Base Action implementation
+        new NumbersListJson(),
+        new GuestAccessLvl()
+    );
+
+$app->start($action, $env, $user);
+```
+
 Verse uses Action Domain Responder pattern. Example of simple action:
 ```php
 <?php
 
 namespace Actions;
 
-use Verse\ActionJson;
-use Verse\Env;
-use Verse\Response;
-use Verse\Response\RespJson;
-use Verse\User;
-
-class NumbersListJson implements ActionJson
+class NumbersListJson implements Action
 {
     public function run(Env $env, User $user): Response
     {
