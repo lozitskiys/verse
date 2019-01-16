@@ -10,7 +10,7 @@ hard to understand.
 No static functions either.
 - _Composition over inheritance_: No abstract classes and inheritance use.
 
-## Decorator based
+## Decorator-based nature
 
 Example of index.php:
 ```php
@@ -59,6 +59,60 @@ class NumbersListJson implements Action
             'result' => 'ok',
             'list' => [1, 2, 3, 4]
         ]);
+    }
+}
+```
+
+## Routing
+
+Routes are stored in yaml file, for example:
+```yaml
+/auth: Auth/AuthForm
+
+/auth/process:
+  action: Auth/AuthProcess
+  method: POST
+
+```
+
+Each line which starts from "/" is a separate route. Default HTTP method is GET.
+You can define route like this:
+```yaml
+/auth: Auth/AuthForm
+```
+or like that, no difference:
+```yaml
+/auth:
+  action: Auth/AuthProcess
+  method: GET
+```
+
+You can use tokens to retrieve variables from URI:
+```yaml
+/blog/read/{id}: Blog/ReadPost
+```
+or even
+```yaml
+/blog/list/{tag}/{author}: Blog/ListPosts
+```
+
+Use tokens in action:
+```php
+class ListPosts implements Action
+{
+    public function run(Env $env, User $user): Response
+    {
+        $tag = $env->srv()->route()->token('tag');
+        $author = $env->srv()->route()->token('author');
+        
+        return new Response\RespHtml($env->srv()->tpl()->render(
+            'blog/list',
+            [
+                'posts' => (new BlogPosts($tag, $author))->list(),
+                'tag' => $tag,
+                'author' => $author
+            ]
+        ));
     }
 }
 ```
