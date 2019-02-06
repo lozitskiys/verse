@@ -69,10 +69,7 @@ Routes are stored in yaml file, for example:
 ```yaml
 /auth: Auth/AuthForm
 
-/auth/process:
-  action: Auth/AuthProcess
-  method: POST
-
+/auth/process POST: Auth/AuthProcess
 ```
 
 Each line which starts from "/" is a separate route. Default HTTP method is GET.
@@ -80,11 +77,9 @@ You can define route like this:
 ```yaml
 /auth: Auth/AuthForm
 ```
-or like that, no difference:
+or like that:
 ```yaml
-/auth:
-  action: Auth/AuthProcess
-  method: GET
+/auth GET: Auth/AuthForm
 ```
 
 You can use tokens to retrieve variables from URI:

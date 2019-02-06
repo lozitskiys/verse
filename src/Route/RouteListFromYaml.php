@@ -34,17 +34,20 @@ class RouteListFromYaml implements RouteList
             throw new Exception('Empty routes in yaml file');
         }
 
-        foreach ($res as $path => $stringOrArray) {
-            if (is_string($stringOrArray)) {
-                $method = 'GET';
-                $action = $stringOrArray;
-            } elseif (is_array($stringOrArray) && !empty($stringOrArray)) {
-                $method = $this->validateAndGetHttpMethod($path, $stringOrArray);
-                $action = $this->validateAndGetAction($path, $stringOrArray);
-            } else {
+        foreach ($res as $pathStr => $action) {
+            if (!is_string($action)) {
                 throw new Exception(
-                    "Error configuring path $path: value must be either string or array"
+                    "Error configuring path $pathStr: value must be valid action name"
                 );
+            }
+
+            $pathArray = explode(' ', $pathStr);
+            if (isset($pathArray[1])) {
+                $method = $this->validateAndGetHttpMethod($pathStr, $pathArray[1]);
+                $path = $pathArray[0];
+            } else {
+                $method = 'GET';
+                $path = $pathStr;
             }
 
             yield new RouteBase($action, $method, $path);
@@ -53,17 +56,13 @@ class RouteListFromYaml implements RouteList
 
     /**
      * @param string $path
-     * @param array $array
+     * @param string $method
      * @return string
      * @throws Exception
      */
-    private function validateAndGetHttpMethod(string $path, array $array): string
+    private function validateAndGetHttpMethod(string $path, string $method): string
     {
-        if (!isset($array['method'])) {
-            return 'GET';
-        }
-
-        $method = strtoupper($array['method']);
+        $method = strtoupper($method);
 
         $validHttpMethods = [
             'GET',
@@ -75,25 +74,10 @@ class RouteListFromYaml implements RouteList
 
         if (!in_array($method, $validHttpMethods)) {
             throw new Exception(
-                "Error configuring path $path: invalid HTTP method " . $array['method']
+                "Error configuring path $path: invalid HTTP method $method"
             );
         }
 
         return $method;
-    }
-
-    /**
-     * @param string $path
-     * @param array $array
-     * @return string
-     * @throws Exception
-     */
-    private function validateAndGetAction(string $path, array $array): string
-    {
-        if (!isset($array['action'])) {
-            throw new Exception("Error configuring path $path: action not set");
-        }
-
-        return $array['action'];
     }
 }
