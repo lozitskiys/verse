@@ -1,11 +1,15 @@
 <?php
 
-namespace Verse;
+namespace Verse\Service;
 
 use Verse\Auth\AuthEncrypted;
+use Verse\Route;
 
 /**
- * Services to use in app.
+ * App services list.
+ *
+ * All possible services, including communication with database, template engine,
+ * cache, mailer and so on.
  */
 interface Services
 {

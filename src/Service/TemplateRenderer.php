@@ -1,6 +1,6 @@
 <?php
 
-namespace Verse;
+namespace Verse\Service;
 
 interface TemplateRenderer
 {

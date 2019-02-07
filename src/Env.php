@@ -2,18 +2,19 @@
 
 namespace Verse;
 
+use Verse\Service\Services;
+
 /**
  * App environment.
  *
  * App services and configuration.
  */
-interface Env
+interface Env extends Services
 {
-    function srv(): Services;
 
     function siteRoot(): string;
 
-    function debug(): bool;
+    function devMode(): bool;
 
-    function defaultErrorDisplayType(): string;
+    function config(): array;
 }

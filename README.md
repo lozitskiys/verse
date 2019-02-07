@@ -19,7 +19,7 @@ Example of index.php:
 /** @var \Verse\Env $env */
 $env = require_once __DIR__ . '/../env.php';
 
-$user = new CurrentUser($env->srv()->pdo());
+$user = new CurrentUser($env->pdo());
 
 $app = 
     // App decorator
@@ -97,10 +97,10 @@ class ListPosts implements Action
 {
     public function run(Env $env, User $user): Response
     {
-        $tag = $env->srv()->route()->token('tag');
-        $author = $env->srv()->route()->token('author');
+        $tag = $env->route()->token('tag');
+        $author = $env->route()->token('author');
         
-        return new Response\RespHtml($env->srv()->tpl()->render(
+        return new Response\RespHtml($env->tpl()->render(
             'blog/list',
             [
                 'posts' => (new BlogPosts($tag, $author))->list(),

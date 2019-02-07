@@ -1,8 +1,8 @@
 <?php
 
-namespace Verse\TemplateRenderer;
+namespace Verse\Service\TemplateRenderer;
 
-use Verse\TemplateRenderer;
+use Verse\Service\TemplateRenderer;
 
 /**
  * Simplest possible template renderer.
