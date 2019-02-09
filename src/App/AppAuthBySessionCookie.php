@@ -29,7 +29,7 @@ class AppAuthBySessionCookie implements App
 
     public function start(Action $action, Env $env, User $user): void
     {
-        $this->tryToAuthenticateUser($env->srv()->auth(), $user);
+        $this->tryToAuthenticateUser($env->auth(), $user);
 
         $this->app->start($action, $env, $user);
     }

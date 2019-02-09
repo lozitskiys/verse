@@ -21,7 +21,7 @@ class AppErrorLevel implements App
 
     public function start(Action $action, Env $env, User $user): void
     {
-        ini_set('display_errors', (int)$env->debug());
+        ini_set('display_errors', (int)$env->devMode());
 
         $this->app->start($action, $env, $user);
     }
