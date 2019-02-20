@@ -52,6 +52,10 @@ class AppAuthBySessionCookie implements App
             return;
         }
 
+        if (!isset($userInfo['password'])) {
+            return;
+        }
+
         if ($userInfo['password'] === $password) {
             $this->authorized->remember(
                 $userInfo['login'],
