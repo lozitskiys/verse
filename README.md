@@ -1,17 +1,5 @@
 # Introduction
 
-Verse key features:
-
-- _Plain architecture_: Compact set of tiny core objects. Minimum (in fact zero) 
-"best practices" such as factories, service locators and other stuff, that makes code
-hard to understand.
-- _Immutability_: Every object is immutable.
-- _SOLID and OOP_: There are no classes and functions that do not implement interfaces.
-No static functions either.
-- _Composition over inheritance_: No abstract classes and inheritance use.
-
-## Decorator-based nature
-
 Example of index.php:
 ```php
 <?php
