@@ -6,5 +6,5 @@ use Verse\User;
 
 interface AccessLevel
 {
-    function check(User $user): bool;
+    public function check(User $user): bool;
 }
