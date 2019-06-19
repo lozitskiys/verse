@@ -3,7 +3,7 @@
 namespace Verse\Service;
 
 use Verse\Auth\AuthEncrypted;
-use Verse\Route;
+use Verse\Routing;
 
 /**
  * App services list.

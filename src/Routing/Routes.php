@@ -1,11 +1,11 @@
 <?php
 
-namespace Verse\Route;
+namespace Verse\Routing;
 
-use Verse\Route;
+use IteratorAggregate;
 use Traversable;
 
-interface RouteList extends \IteratorAggregate
+interface Routes extends IteratorAggregate
 {
     /**
      * @return Traversable|Route[]

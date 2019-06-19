@@ -1,9 +1,10 @@
 <?php
 
-namespace Verse\Route;
+namespace Verse\Routing\Route;
 
 use Verse\Error\RouteNotFoundException;
-use Verse\Route;
+use Verse\Routing\Route;
+use Verse\Routing\Routes;
 
 class RouteByUri implements Route
 {
@@ -12,7 +13,7 @@ class RouteByUri implements Route
     private $httpMethod;
     private $uri;
 
-    public function __construct(RouteList $routeList, string $httpMethod, string $uri)
+    public function __construct(Routes $routeList, string $httpMethod, string $uri)
     {
         $this->routeList = $routeList;
         $this->httpMethod = $httpMethod;
@@ -76,7 +77,7 @@ class RouteByUri implements Route
         $httpMethod = strtoupper($this->httpMethod);
 
         foreach ($this->routeList as $route) {
-            if ($this->hasToken($route)) {
+            if (false !== strpos($route->path(), '{')) {
                 $uriBeforeToken = substr($route->path(), 0, strpos($route->path(), '{'));
 
                 $pathMatched = 0 === strpos($path, $uriBeforeToken);
@@ -86,7 +87,7 @@ class RouteByUri implements Route
                         $route->action(),
                         $route->method(),
                         $route->path(),
-                        (new RouteTokensStd($route, $path))->list()
+                        new RouteTokens($route, $path)
                     );
                     break;
                 }
@@ -101,10 +102,5 @@ class RouteByUri implements Route
         }
 
         return $this->routeCached;
-    }
-
-    private function hasToken(Route $route): bool
-    {
-        return false !== strpos($route->path(), '{');
     }
 }

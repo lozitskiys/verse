@@ -1,8 +1,8 @@
 <?php
 
-use Verse\Route\RouteList;
-use Verse\Route\RouteBase;
-use Verse\Route\RouteByUri;
+use Verse\Routing\Routes;
+use Verse\Routing\RouteBase;
+use Verse\Routing\RouteByUri;
 
 class RouteByUriTest extends \Codeception\Test\Unit
 {
@@ -11,9 +11,9 @@ class RouteByUriTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-    private function routeList(): RouteList
+    private function routeList(): Routes
     {
-        return new class implements RouteList
+        return new class implements Routes
         {
             public function getIterator(): Traversable
             {

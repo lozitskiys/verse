@@ -1,8 +1,10 @@
 <?php
 
-namespace Verse\Route;
+namespace Verse\Routing\Route;
 
-use Verse\Route;
+use ArrayAccess;
+use Exception;
+use Verse\Routing\Route;
 
 class RouteBase implements Route
 {
@@ -15,7 +17,7 @@ class RouteBase implements Route
         string $action,
         string $method,
         string $path,
-        array $tokens = []
+        ArrayAccess $tokens = null
     ) {
         $this->action = $action;
         $this->method = $method;
@@ -41,12 +43,12 @@ class RouteBase implements Route
     /**
      * @param string $key
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function token(string $key)
     {
         if (!isset($this->tokens[$key])) {
-            throw new \Exception("Token $key not found");
+            throw new Exception("Token $key not found");
         }
 
         return $this->tokens[$key];

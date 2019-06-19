@@ -1,13 +1,15 @@
 <?php
 
-namespace Verse\Route;
+namespace Verse\Routing\Routes;
 
 use Exception;
 use Symfony\Component\Yaml\Yaml;
 use Throwable;
 use Traversable;
+use Verse\Routing\Route\RouteBase;
+use Verse\Routing\Routes;
 
-class RouteListFromYaml implements RouteList
+class RoutesYaml implements Routes
 {
     private $path;
     private $yamlParser;

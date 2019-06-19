@@ -6,7 +6,7 @@ use Exception;
 use Psr\Container\ContainerInterface;
 use Verse\Auth\AuthEncrypted;
 use Verse\Env;
-use Verse\Route;
+use Verse\Routing;
 use Verse\Service\TemplateRenderer;
 
 class EnvBase implements Env
@@ -88,6 +88,4 @@ class EnvBase implements Env
     {
         return $this->siteRoot;
     }
-
-
 }

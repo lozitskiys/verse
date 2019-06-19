@@ -1,6 +1,6 @@
 <?php
 
-namespace Verse;
+namespace Verse\Routing;
 
 interface Route
 {
