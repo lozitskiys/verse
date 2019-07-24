@@ -3,10 +3,11 @@
 namespace Verse\Env;
 
 use Exception;
+use PDO;
 use Psr\Container\ContainerInterface;
 use Verse\Auth\AuthEncrypted;
 use Verse\Env;
-use Verse\Route;
+use Verse\Routing\Route;
 use Verse\Service\TemplateRenderer;
 
 class EnvBase implements Env
@@ -26,10 +27,10 @@ class EnvBase implements Env
     }
 
     /**
-     * @return \PDO
+     * @return PDO
      * @throws Exception
      */
-    public function pdo(): \PDO
+    public function pdo(): PDO
     {
         return $this->container->get(__FUNCTION__);
     }
@@ -88,6 +89,4 @@ class EnvBase implements Env
     {
         return $this->siteRoot;
     }
-
-
 }

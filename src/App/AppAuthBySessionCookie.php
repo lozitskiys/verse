@@ -2,6 +2,7 @@
 
 namespace Verse\App;
 
+use Throwable;
 use Verse\Action;
 use Verse\App;
 use Verse\Auth\AuthEncrypted;
@@ -48,7 +49,7 @@ class AppAuthBySessionCookie implements App
             $password = $auth->decrypt($_COOKIE[$this->authorized->cookieKey()]);
 
             $userInfo = $user->info();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return;
         }
 

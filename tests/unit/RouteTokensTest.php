@@ -1,12 +1,14 @@
 <?php
 
-use Verse\Route\RouteBase;
-use Verse\Route\RouteTokensStd;
+use Codeception\Test\Unit;
+use Verse\Error\RouteNotFoundException;
+use Verse\Routing\Route\RouteBase;
+use Verse\Routing\Route\RouteTokens;
 
-class RouteTokensTest extends \Codeception\Test\Unit
+class RouteTokensTest extends Unit
 {
     /**
-     * @var \UnitTester
+     * @var UnitTester
      */
     protected $tester;
 
@@ -18,14 +20,14 @@ class RouteTokensTest extends \Codeception\Test\Unit
 
         $this->assertEquals(
             $exp,
-            (new RouteTokensStd(
+            (new RouteTokens(
                 new RouteBase(
                     'TestAction',
                     'GET',
                     '/wiki/{id}'
                 ),
                 '/wiki/777'
-            ))->list()
+            ))->tokens()
         );
     }
 
@@ -38,32 +40,32 @@ class RouteTokensTest extends \Codeception\Test\Unit
 
         $this->assertEquals(
             $exp,
-            (new RouteTokensStd(
+            (new RouteTokens(
                 new RouteBase(
                     'TestAction',
                     'GET',
                     '/wiki/{tag}/{id}'
                 ),
                 '/wiki/php/777'
-            ))->list()
+            ))->tokens()
         );
     }
 
     public function testTokenWrongPath()
     {
         $call = function () {
-            (new RouteTokensStd(
+            (new RouteTokens(
                 new RouteBase(
                     'TestAction',
                     'GET',
                     '/wiki/id'
                 ),
                 '/wiki/777'
-            ))->list();
+            ))->tokens();
         };
 
         $this->tester->expectThrowable(
-            new \Verse\Error\RouteNotFoundException('Error in route /wiki/id: no tokens found'),
+            new RouteNotFoundException('Error in route /wiki/id: no tokens found'),
             $call
         );
     }

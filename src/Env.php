@@ -11,10 +11,9 @@ use Verse\Service\Services;
  */
 interface Env extends Services
 {
+    public function siteRoot(): string;
 
-    function siteRoot(): string;
+    public function devMode(): bool;
 
-    function devMode(): bool;
-
-    function config(): array;
+    public function config(): array;
 }

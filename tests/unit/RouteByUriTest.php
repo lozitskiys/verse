@@ -1,19 +1,20 @@
 <?php
 
-use Verse\Route\RouteList;
-use Verse\Route\RouteBase;
-use Verse\Route\RouteByUri;
+use Codeception\Test\Unit;
+use Verse\Routing\Route\RouteBase;
+use Verse\Routing\Route\RouteByUri;
+use Verse\Routing\Routes;
 
-class RouteByUriTest extends \Codeception\Test\Unit
+class RouteByUriTest extends Unit
 {
     /**
-     * @var \UnitTester
+     * @var UnitTester
      */
     protected $tester;
 
-    private function routeList(): RouteList
+    private function routeList(): Routes
     {
-        return new class implements RouteList
+        return new class implements Routes
         {
             public function getIterator(): Traversable
             {
@@ -73,8 +74,4 @@ class RouteByUriTest extends \Codeception\Test\Unit
         $this->assertEquals('video', $route->token('tag'));
         $this->assertEquals('777', $route->token('id'));
     }
-
-
-
-
 }

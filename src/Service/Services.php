@@ -2,8 +2,9 @@
 
 namespace Verse\Service;
 
+use PDO;
 use Verse\Auth\AuthEncrypted;
-use Verse\Route;
+use Verse\Routing\Route;
 
 /**
  * App services list.
@@ -14,22 +15,22 @@ use Verse\Route;
 interface Services
 {
     /**
-     * @return \PDO DB interface
+     * @return PDO DB interface
      */
-    function pdo(): \PDO;
+    public function pdo(): PDO;
 
     /**
      * @return TemplateRenderer
      */
-    function tpl(): TemplateRenderer;
+    public function tpl(): TemplateRenderer;
 
     /**
      * @return AuthEncrypted
      */
-    function auth(): AuthEncrypted;
+    public function auth(): AuthEncrypted;
 
     /**
      * @return Route
      */
-    function route(): Route;
+    public function route(): Route;
 }

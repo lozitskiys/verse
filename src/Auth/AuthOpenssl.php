@@ -2,6 +2,8 @@
 
 namespace Verse\Auth;
 
+use Exception;
+
 class AuthOpenssl implements AuthEncrypted
 {
     private $seed;
@@ -33,7 +35,7 @@ class AuthOpenssl implements AuthEncrypted
     /**
      * @param string $hash
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function decrypt(string $hash): string
     {
@@ -46,7 +48,7 @@ class AuthOpenssl implements AuthEncrypted
 
         $credentials = explode($this->credentialsSeparator, $str);
         if (empty($credentials) || count($credentials) != 2) {
-            throw new \Exception("Error decrypting auth information");
+            throw new Exception("Error decrypting auth information");
         }
 
         return $credentials[1];

@@ -2,7 +2,7 @@
 
 namespace Verse\Service;
 
-
+use Exception;
 use Psr\Container\ContainerInterface;
 
 class ServiceContainer implements ContainerInterface
@@ -18,17 +18,17 @@ class ServiceContainer implements ContainerInterface
     /**
      * @param string $id
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function get($id)
     {
         if (!isset($this->instances[$id])) {
             if (!$this->has($id)) {
-                throw new \Exception(
+                throw new Exception(
                     "Instance name=$id not found in service container"
                 );
             } elseif (!is_callable($this->container[$id])) {
-                throw new \Exception(
+                throw new Exception(
                     "Instance name=$id must be type of callable"
                 );
             }
@@ -36,7 +36,7 @@ class ServiceContainer implements ContainerInterface
             $this->instances[$id] = $this->container[$id]();
 
             if (!is_object($this->instances[$id])) {
-                throw new \Exception("Instance name=$id is not an object");
+                throw new Exception("Instance name=$id is not an object");
             }
         }
 

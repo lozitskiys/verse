@@ -4,11 +4,11 @@ namespace Verse\Auth;
 
 interface Authorized
 {
-    function remember(string $sessionValue, string $cookieValue): void;
+    public function remember(string $sessionValue, string $cookieValue): void;
 
-    function forget(): void;
+    public function forget(): void;
 
-    function cookieKey(): string;
+    public function cookieKey(): string;
 
-    function sessionKey(): string;
+    public function sessionKey(): string;
 }

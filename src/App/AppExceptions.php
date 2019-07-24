@@ -2,6 +2,8 @@
 
 namespace Verse\App;
 
+use Throwable;
+use TypeError;
 use Verse\Action;
 use Verse\App;
 use Verse\Env;
@@ -26,13 +28,13 @@ class AppExceptions implements App
     {
         try {
             $this->app->start($action, $env, $user);
-        } catch (\TypeError $error) {
+        } catch (TypeError $error) {
             $code = 500;
             $errorMsg = $error->getMessage();
         } catch (RouteNotFoundException $exception) {
             $code = 404;
             $errorMsg = $exception->getMessage();
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $code = 500;
             $errorMsg = $exception->getMessage();
         }
