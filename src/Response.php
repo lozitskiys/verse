@@ -4,7 +4,7 @@ namespace Verse;
 
 interface Response
 {
-    function headers(): array;
+    public function headers(): array;
 
-    function body(): string;
+    public function body(): string;
 }

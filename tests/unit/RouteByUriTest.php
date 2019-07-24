@@ -1,13 +1,14 @@
 <?php
 
+use Codeception\Test\Unit;
+use Verse\Routing\Route\RouteBase;
+use Verse\Routing\Route\RouteByUri;
 use Verse\Routing\Routes;
-use Verse\Routing\RouteBase;
-use Verse\Routing\RouteByUri;
 
-class RouteByUriTest extends \Codeception\Test\Unit
+class RouteByUriTest extends Unit
 {
     /**
-     * @var \UnitTester
+     * @var UnitTester
      */
     protected $tester;
 
@@ -73,8 +74,4 @@ class RouteByUriTest extends \Codeception\Test\Unit
         $this->assertEquals('video', $route->token('tag'));
         $this->assertEquals('777', $route->token('id'));
     }
-
-
-
-
 }

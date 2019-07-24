@@ -1,6 +1,5 @@
 <?php
 
-
 use Codeception\Test\Unit;
 use Verse\Error\RouteNotFoundException;
 use Verse\Routing\Route\RouteBase;
@@ -9,7 +8,7 @@ use Verse\Routing\Route\RouteTokens;
 class RouteTokensTest extends Unit
 {
     /**
-     * @var \UnitTester
+     * @var UnitTester
      */
     protected $tester;
 

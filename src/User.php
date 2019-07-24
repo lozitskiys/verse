@@ -4,5 +4,5 @@ namespace Verse;
 
 interface User
 {
-    function info(): array;
+    public function info(): array;
 }

@@ -10,5 +10,5 @@ interface Routes extends IteratorAggregate
     /**
      * @return Traversable|Route[]
      */
-    function getIterator(): Traversable;
+    public function getIterator(): Traversable;
 }

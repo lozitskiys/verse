@@ -2,6 +2,7 @@
 
 namespace Verse\Service\TemplateRenderer;
 
+use Exception;
 use Verse\Service\TemplateRenderer;
 
 /**
@@ -22,14 +23,14 @@ class SimplestRenderer implements TemplateRenderer
      * @param string $templateName
      * @param array $params
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function render(string $templateName, array $params = []): string
     {
         $fileName = $this->tplDir . '/' . $templateName . '.php';
 
         if (!is_file($fileName)) {
-            throw new \Exception("Template $templateName doesn't exists.");
+            throw new Exception("Template $templateName doesn't exists.");
         }
 
         if (!empty($params)) {

@@ -4,11 +4,11 @@ namespace Verse\Routing;
 
 interface Route
 {
-    function path(): string;
+    public function path(): string;
 
-    function method(): string;
+    public function method(): string;
 
-    function action(): string;
+    public function action(): string;
 
-    function token(string $key);
+    public function token(string $key);
 }

@@ -4,5 +4,5 @@ namespace Verse\Service;
 
 interface TemplateRenderer
 {
-    function render(string $templateName, array $params = []): string;
+    public function render(string $templateName, array $params = []): string;
 }

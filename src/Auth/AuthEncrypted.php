@@ -4,7 +4,7 @@ namespace Verse\Auth;
 
 interface AuthEncrypted
 {
-    function encrypt(int $uniqueNumber, string $password): string;
+    public function encrypt(int $uniqueNumber, string $password): string;
 
-    function decrypt(string $hash): string;
+    public function decrypt(string $hash): string;
 }

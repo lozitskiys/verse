@@ -2,13 +2,14 @@
 
 namespace Verse\Service\TemplateRenderer;
 
+use Twig_Environment;
 use Verse\Service\TemplateRenderer;
 
 class TwigRenderer implements TemplateRenderer
 {
     private $twig;
 
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(Twig_Environment $twig)
     {
         $this->twig = $twig;
     }
