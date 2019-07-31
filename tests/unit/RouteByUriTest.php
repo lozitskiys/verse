@@ -41,6 +41,18 @@ class RouteByUriTest extends Unit
                     'GET',
                     '/test4/{id}'
                 );
+
+                yield new RouteBase(
+                    'TestAction5',
+                    'GET',
+                    '/test5/{id}/video'
+                );
+
+                yield new RouteBase(
+                    'TestAction6',
+                    'POST',
+                    '/test4/{id}'
+                );
             }
         };
     }
@@ -73,5 +85,24 @@ class RouteByUriTest extends Unit
         $this->assertEquals('GET', $route->method());
         $this->assertEquals('video', $route->token('tag'));
         $this->assertEquals('777', $route->token('id'));
+    }
+
+    public function testRouteWithTokensInMiddleOfTheRoute()
+    {
+        $route = new RouteByUri($this->routeList(), 'GET', '/test5/777/video');
+
+        $this->assertEquals('TestAction5', $route->action());
+        $this->assertEquals('/test5/{id}/video', $route->path());
+        $this->assertEquals('GET', $route->method());
+        $this->assertEquals('777', $route->token('id'));
+    }
+
+    public function testRouteHttpMethod()
+    {
+        $route = new RouteByUri($this->routeList(), 'POST', '/test4/123');
+
+        $this->assertEquals('TestAction6', $route->action());
+        $this->assertEquals('/test4/{id}', $route->path());
+        $this->assertEquals('POST', $route->method());
     }
 }

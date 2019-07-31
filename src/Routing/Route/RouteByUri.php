@@ -74,27 +74,53 @@ class RouteByUri implements Route
             $path = rtrim($url['path'], ' \/');
         }
 
+        $currentPathArray = explode('/', $path);
+
         $httpMethod = strtoupper($this->httpMethod);
 
         foreach ($this->routeList as $route) {
-            if (false !== strpos($route->path(), '{')) {
-                $uriBeforeToken = substr($route->path(), 0, strpos($route->path(), '{'));
+            if ($httpMethod !== $route->method()) {
+                continue;
+            }
 
-                $pathMatched = 0 === strpos($path, $uriBeforeToken);
+            $pathArray = explode('/', $route->path());
 
-                if ($pathMatched && $httpMethod === $route->method()) {
-                    $this->routeCached = new RouteBase(
-                        $route->action(),
-                        $route->method(),
-                        $route->path(),
-                        new RouteTokens($route, $path)
-                    );
-                    break;
+            if (count($pathArray) != count($currentPathArray)) {
+                continue;
+            }
+
+            $pathMatched = true;
+            $routeHasTokens = false;
+            foreach ($pathArray as $ind => $pathPart) {
+                if ($pathPart == $currentPathArray[$ind]) {
+                    continue;
                 }
-            } elseif ($path === $route->path() && $httpMethod === $route->method()) {
-                $this->routeCached = $route;
+
+                if (0 === strpos($pathPart, '{')) {
+                    $routeHasTokens = true;
+                    continue;
+                }
+
+                $pathMatched = false;
                 break;
             }
+
+            if (!$pathMatched) {
+                continue;
+            }
+
+            if ($routeHasTokens) {
+                $this->routeCached = new RouteBase(
+                    $route->action(),
+                    $route->method(),
+                    $route->path(),
+                    new RouteTokens($route, $path)
+                );
+            } else {
+                $this->routeCached = $route;
+            }
+
+            break;
         }
 
         if (null === $this->routeCached) {
