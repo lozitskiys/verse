@@ -37,10 +37,6 @@ class AppAuthBySessionCookie implements App
 
     private function tryToAuthenticateUser(AuthEncrypted $auth, User $user): void
     {
-        if (isset($_SESSION[$this->authorized->sessionKey()])) {
-            return;
-        }
-
         if (!isset($_COOKIE[$this->authorized->cookieKey()])) {
             return;
         }
