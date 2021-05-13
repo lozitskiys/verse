@@ -13,7 +13,5 @@ interface Env extends Services
 {
     public function siteRoot(): string;
 
-    public function devMode(): bool;
-
     public function config(): array;
 }

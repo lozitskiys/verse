@@ -11,14 +11,11 @@ $user = new CurrentUser($env->pdo());
 
 $app = 
     // App decorator
-    new AppErrorLevel(
+    new AppLocaleAndTz(
         // App decorator
-        new AppLocaleAndTz(
-            // App decorator
-            new AppSession(
-                // Base App implementation
-                new AppBase()
-            )
+        new AppSession(
+            // Base App implementation
+            new AppBase()
         )
     );
 

@@ -67,24 +67,6 @@ class EnvBase implements Env
         return $this->config;
     }
 
-    /**
-     * @return bool
-     * @throws Exception
-     */
-    public function devMode(): bool
-    {
-        if (!isset($this->config['debug'])) {
-            throw new Exception('"debug" variable not found in .env file');
-        }
-
-        return
-            true === $this->config['debug'] ||
-            'yes' === $this->config['debug'] ||
-            'on' === $this->config['debug'] ||
-            '1' === $this->config['debug'] ||
-            1 === $this->config['debug'];
-    }
-
     public function siteRoot(): string
     {
         return $this->siteRoot;
