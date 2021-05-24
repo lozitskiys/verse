@@ -17,11 +17,8 @@ use Verse\User;
  */
 class AppExceptions implements App
 {
-    private $app;
-
-    public function __construct(App $app)
+    public function __construct(private App $app)
     {
-        $this->app = $app;
     }
 
     public function start(Action $action, Env $env, User $user): void
@@ -41,7 +38,7 @@ class AppExceptions implements App
 
         if (isset($errorMsg)) {
             // redirect to errors page
-            exit($errorMsg.$code);
+            exit($errorMsg . $code);
         }
     }
 }

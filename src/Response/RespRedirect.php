@@ -6,11 +6,8 @@ use Verse\Response;
 
 class RespRedirect implements Response
 {
-    private $url;
-
-    public function __construct(string $url)
+    public function __construct(private string $url)
     {
-        $this->url = $url;
     }
 
     public function headers(): array

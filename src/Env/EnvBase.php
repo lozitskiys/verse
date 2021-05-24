@@ -12,18 +12,11 @@ use Verse\Service\TemplateRenderer;
 
 class EnvBase implements Env
 {
-    private $container;
-    private $siteRoot;
-    private $config;
-
     public function __construct(
-        ContainerInterface $container,
-        string $siteRoot,
-        array $config = []
+        private ContainerInterface $container,
+        private string $siteRoot,
+        private array $config = []
     ) {
-        $this->container = $container;
-        $this->siteRoot = $siteRoot;
-        $this->config = $config;
     }
 
     /**

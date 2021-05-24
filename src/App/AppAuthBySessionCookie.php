@@ -17,15 +17,10 @@ use Verse\User;
  */
 class AppAuthBySessionCookie implements App
 {
-    private $app;
-    private $authorized;
-
     public function __construct(
-        App $app,
-        Authorized $authorized
+        private App $app,
+        private Authorized $authorized
     ) {
-        $this->app = $app;
-        $this->authorized = $authorized;
     }
 
     public function start(Action $action, Env $env, User $user): void
@@ -45,7 +40,7 @@ class AppAuthBySessionCookie implements App
             $password = $auth->decrypt($_COOKIE[$this->authorized->cookieKey()]);
 
             $userInfo = $user->info();
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return;
         }
 
@@ -55,7 +50,7 @@ class AppAuthBySessionCookie implements App
 
         if ($userInfo['password'] === $password) {
             $this->authorized->remember(
-                $userInfo['login'],
+                $userInfo['id'],
                 $auth->encrypt($userInfo['id'], $userInfo['password'])
             );
         }

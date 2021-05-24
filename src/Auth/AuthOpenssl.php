@@ -6,18 +6,11 @@ use Exception;
 
 class AuthOpenssl implements AuthEncrypted
 {
-    private $seed;
-    private $method;
-    private $credentialsSeparator;
-
     public function __construct(
-        string $seed,
-        string $method = 'bf-ecb',
-        string $credentialsSeparator = '|'
+        private string $seed,
+        private string $method = 'bf-ecb',
+        private string $credentialsSeparator = '|'
     ) {
-        $this->seed = $seed;
-        $this->method = $method;
-        $this->credentialsSeparator = $credentialsSeparator;
     }
 
     public function encrypt(int $uniqueNumber, string $password): string

@@ -14,11 +14,8 @@ use Verse\User;
  */
 class AppSession implements App
 {
-    private $app;
-
-    public function __construct(App $app)
+    public function __construct(private App $app)
     {
-        $this->app = $app;
     }
 
     public function start(Action $action, Env $env, User $user): void

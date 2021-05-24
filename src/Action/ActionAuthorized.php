@@ -17,15 +17,10 @@ use Verse\User;
  */
 class ActionAuthorized implements Action
 {
-    private $action;
-    private $guestAccLvl;
-
     public function __construct(
-        Action $action,
-        AccessLevel $guestAccLvl
+        private Action $action,
+        private AccessLevel $guestAccLvl
     ) {
-        $this->action = $action;
-        $this->guestAccLvl = $guestAccLvl;
     }
 
     /**
