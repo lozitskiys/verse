@@ -7,11 +7,13 @@ class AuthRemembered implements Authorized
     /**
      * @param string $cookieAuthKey
      * @param string $sessionKey
+     * @param string $domain
      * @param int $authPeriodSec Year as default value
      */
     public function __construct(
         private string $cookieAuthKey,
         private string $sessionKey,
+        private string $domain = '',
         private int $authPeriodSec = 31536000
     ) {
     }
@@ -25,7 +27,7 @@ class AuthRemembered implements Authorized
             $cookieValue,
             time() + $this->authPeriodSec,
             '/',
-            null,
+            $this->domain,
             null,
             true
         );
@@ -35,7 +37,7 @@ class AuthRemembered implements Authorized
     {
         unset($_SESSION[$this->sessionKey()]);
 
-        setcookie($this->cookieKey(), '', time() - 3600, '/');
+        setcookie($this->cookieKey(), '', time() - 3600, '/', $this->domain);
     }
 
     public function cookieKey(): string
