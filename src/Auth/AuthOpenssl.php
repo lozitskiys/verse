@@ -13,10 +13,10 @@ class AuthOpenssl implements AuthEncrypted
     ) {
     }
 
-    public function encrypt(int $uniqueNumber, string $password): string
+    public function encrypt(array $secretData): string
     {
         $binHash = openssl_encrypt(
-            $uniqueNumber . $this->credentialsSeparator . $password,
+            implode($this->credentialsSeparator, $secretData),
             $this->method,
             $this->seed,
             true
@@ -27,10 +27,10 @@ class AuthOpenssl implements AuthEncrypted
 
     /**
      * @param string $hash
-     * @return string
+     * @return array
      * @throws Exception
      */
-    public function decrypt(string $hash): string
+    public function decrypt(string $hash): array
     {
         $str = openssl_decrypt(
             pack("H*", $hash),
@@ -39,11 +39,6 @@ class AuthOpenssl implements AuthEncrypted
             true
         );
 
-        $credentials = explode($this->credentialsSeparator, $str);
-        if (empty($credentials) || count($credentials) != 2) {
-            throw new Exception("Error decrypting auth information");
-        }
-
-        return $credentials[1];
+        return explode($this->credentialsSeparator, $str);
     }
 }
