@@ -37,7 +37,7 @@ class AppAuthBySessionCookie implements App
         }
 
         try {
-            $password = $auth->decrypt($_COOKIE[$this->authorized->cookieKey()]);
+            $data = $auth->decrypt($_COOKIE[$this->authorized->cookieKey()]);
 
             $userInfo = $user->info();
         } catch (Throwable) {
@@ -48,10 +48,14 @@ class AppAuthBySessionCookie implements App
             return;
         }
 
-        if ($userInfo['password'] === $password) {
+        if ($userInfo['password'] === $data['password']) {
             $this->authorized->remember(
                 $userInfo['id'],
-                $auth->encrypt($userInfo['id'], $userInfo['password'])
+                $auth->encrypt([
+                    'id' => $userInfo['id'],
+                    'password' => $userInfo['password'],
+                    'code' => $userInfo['code']
+                ])
             );
         }
     }

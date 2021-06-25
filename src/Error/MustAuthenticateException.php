@@ -2,6 +2,8 @@
 
 namespace Verse\Error;
 
-class MustAuthenticateException extends \Exception
+use Exception;
+
+class MustAuthenticateException extends Exception
 {
 }
