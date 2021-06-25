@@ -36,6 +36,6 @@ class AuthOpenssl implements AuthEncrypted
             true
         );
 
-        return json_decode($str, true);
+        return json_decode($str, true) ?? [];
     }
 }
