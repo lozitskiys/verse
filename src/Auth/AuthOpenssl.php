@@ -6,17 +6,14 @@ use Exception;
 
 class AuthOpenssl implements AuthEncrypted
 {
-    public function __construct(
-        private string $seed,
-        private string $method = 'bf-ecb',
-        private string $credentialsSeparator = '|'
-    ) {
+    public function __construct(private string $seed, private string $method = 'bf-ecb')
+    {
     }
 
     public function encrypt(array $secretData): string
     {
         $binHash = openssl_encrypt(
-            implode($this->credentialsSeparator, $secretData),
+            json_encode($secretData),
             $this->method,
             $this->seed,
             true
@@ -39,6 +36,6 @@ class AuthOpenssl implements AuthEncrypted
             true
         );
 
-        return explode($this->credentialsSeparator, $str);
+        return json_decode($str, true);
     }
 }
