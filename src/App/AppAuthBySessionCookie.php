@@ -44,11 +44,11 @@ class AppAuthBySessionCookie implements App
             return;
         }
 
-        if (!isset($userInfo['password'])) {
+        if (!isset($userInfo['id']) || !isset($data['id'])) {
             return;
         }
 
-        if ($userInfo['password'] === $data['password']) {
+        if ($userInfo['id'] === $data['id']) {
             $this->authorized->remember(
                 $userInfo['id'],
                 $auth->encrypt([
