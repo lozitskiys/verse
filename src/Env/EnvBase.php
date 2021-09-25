@@ -73,7 +73,7 @@ class EnvBase implements Env
             $message = print_r($message, true);
         }
 
-        $logPath = dirname(__DIR__) . '/logs/' . $logFile;
+        $logPath = $this->siteRoot . '/logs/' . $logFile;
         error_log($date . ' ' . $message . "\n", 3, $logPath);
 
         return $date;
