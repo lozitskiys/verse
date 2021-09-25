@@ -2,6 +2,7 @@
 
 namespace Verse\Env;
 
+use DateTime;
 use Exception;
 use PDO;
 use Psr\Container\ContainerInterface;
@@ -63,5 +64,18 @@ class EnvBase implements Env
     public function siteRoot(): string
     {
         return $this->siteRoot;
+    }
+
+    public function log($message, string $logFile): string
+    {
+        $date = (new DateTime)->format('d.m.Y H:i:s');
+        if (!is_string($message)) {
+            $message = print_r($message, true);
+        }
+
+        $logPath = dirname(__DIR__) . '/logs/' . $logFile;
+        error_log($date . ' ' . $message . "\n", 3, $logPath);
+
+        return $date;
     }
 }

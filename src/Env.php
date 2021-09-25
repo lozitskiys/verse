@@ -14,4 +14,6 @@ interface Env extends Services
     public function siteRoot(): string;
 
     public function config(): array;
+
+    public function log($message, string $logFile): string;
 }
