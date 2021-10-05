@@ -48,6 +48,12 @@ class AppAuthBySessionCookie implements App
             return;
         }
 
+        if (isset($userInfo['archived']) && $userInfo['archived']) {
+            $this->authorized->forget();
+
+            return;
+        }
+
         if ($userInfo['id'] === $data['id']) {
             $this->authorized->remember(
                 $userInfo['id'],
