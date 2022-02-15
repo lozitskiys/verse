@@ -9,6 +9,7 @@ use Psr\Container\ContainerInterface;
 use Verse\Auth\AuthEncrypted;
 use Verse\Env;
 use Verse\Routing\Route;
+use Verse\Service\Mailer;
 use Verse\Service\TemplateRenderer;
 
 class EnvBase implements Env
@@ -52,6 +53,14 @@ class EnvBase implements Env
      * @throws Exception
      */
     public function route(): Route
+    {
+        return $this->container->get(__FUNCTION__);
+    }
+
+    /**
+     * @return Mailer
+     */
+    public function mailer():Mailer
     {
         return $this->container->get(__FUNCTION__);
     }
