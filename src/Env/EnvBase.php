@@ -60,7 +60,7 @@ class EnvBase implements Env
     /**
      * @return Mailer
      */
-    public function mailer():Mailer
+    public function mailer(): Mailer
     {
         return $this->container->get(__FUNCTION__);
     }
