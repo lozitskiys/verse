@@ -33,4 +33,9 @@ interface Services
      * @return Route
      */
     public function route(): Route;
+
+    /**
+     * @return Mailer
+     */
+    public function mailer(): Mailer;
 }
