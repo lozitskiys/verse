@@ -65,6 +65,19 @@ class EnvBase implements Env
         return $this->container->get(__FUNCTION__);
     }
 
+    /**
+     * @param string $serviceName
+     * @return mixed
+     */
+    public function getService(string $serviceName): mixed
+    {
+        if (!$this->container->has($serviceName)) {
+            throw new Exception("Unknown service $serviceName");
+        }
+
+        return $this->container->get($serviceName);
+    }
+
     public function config(): array
     {
         return $this->config;

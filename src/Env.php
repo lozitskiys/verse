@@ -11,6 +11,8 @@ use Verse\Service\Services;
  */
 interface Env extends Services
 {
+    public function getService(string $serviceName): mixed;
+
     public function siteRoot(): string;
 
     public function config(): array;
