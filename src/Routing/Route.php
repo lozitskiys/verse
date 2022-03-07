@@ -10,5 +10,5 @@ interface Route
 
     public function action(): string;
 
-    public function token(string $key);
+    public function token(string $key, bool $strict = true);
 }

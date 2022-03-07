@@ -76,6 +76,13 @@ class RouteByUriTest extends Unit
         $this->assertEquals('777', $route->token('id'));
     }
 
+    public function testRouteWithTokenNotStrict()
+    {
+        $route = new RouteByUri($this->routeList(), 'GET', '/test4/777');
+
+        $this->assertNull($route->token('unknown', false));
+    }
+
     public function testRouteWithTokens()
     {
         $route = new RouteByUri($this->routeList(), 'GET', '/test3/video/777');

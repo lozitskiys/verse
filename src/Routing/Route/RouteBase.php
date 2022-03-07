@@ -42,13 +42,17 @@ class RouteBase implements Route
 
     /**
      * @param string $key
+     * @param bool $strict
      * @return mixed
-     * @throws Exception
      */
-    public function token(string $key)
+    public function token(string $key, bool $strict = true)
     {
         if (!isset($this->tokens[$key])) {
-            throw new Exception("Token $key not found");
+            if ($strict) {
+                throw new Exception("Token $key not found");
+            }
+
+            return null;
         }
 
         return $this->tokens[$key];

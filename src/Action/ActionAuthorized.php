@@ -4,6 +4,7 @@ namespace Verse\Action;
 
 use Verse\Access\AccessLevel;
 use Verse\Access\AdminAccess;
+use Verse\Access\DeveloperAccess;
 use Verse\Access\GuestAccess;
 use Verse\Action;
 use Verse\Env;
@@ -23,7 +24,8 @@ class ActionAuthorized implements Action
     public function __construct(
         private Action $action,
         private ?AccessLevel $guestAccLvl,
-        private ?AccessLevel $adminAccLvl
+        private ?AccessLevel $adminAccLvl,
+        private ?AccessLevel $developerAccLvl
     ) {
     }
 
@@ -46,12 +48,15 @@ class ActionAuthorized implements Action
      */
     private function checkAccess(User $user): void
     {
-        $adminAccessNeeded = false;
+        $adminAccessNeeded = $developerAccessNeeded = false;
         foreach (class_implements($this->action) as $k => $v) {
             if (GuestAccess::class === $k) {
                 return;
             } elseif (AdminAccess::class === $k) {
                 $adminAccessNeeded = true;
+                break;
+            } elseif (DeveloperAccess::class === $k) {
+                $developerAccessNeeded = true;
                 break;
             }
         }
@@ -60,11 +65,22 @@ class ActionAuthorized implements Action
             throw new MustAuthenticateException();
         }
 
-        if (
-            $adminAccessNeeded &&
+        $adminFailed = $developerFailed = false;
+        if ($adminAccessNeeded &&
             null !== $this->adminAccLvl &&
             false === $this->adminAccLvl->check($user)
         ) {
+            $adminFailed = true;
+        }
+
+        if ($developerAccessNeeded &&
+            null !== $this->developerAccLvl &&
+            false === $this->developerAccLvl->check($user)
+        ) {
+            $developerFailed = true;
+        }
+
+        if ($adminFailed || $developerFailed) {
             throw new AccessDeniedException();
         }
     }

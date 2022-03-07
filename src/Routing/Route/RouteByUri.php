@@ -49,12 +49,13 @@ class RouteByUri implements Route
 
     /**
      * @param string $key
+     * @param bool $strict
      * @return mixed
      * @throws RouteNotFoundException
      */
-    public function token(string $key)
+    public function token(string $key, bool $strict = true)
     {
-        return $this->route()->token($key);
+        return $this->route()->token($key, $strict);
     }
 
     /**
