@@ -10,6 +10,6 @@ class LevelAdmin implements AccessLevel
 {
     public function check(User $user): bool
     {
-        return $user->info()['role'] === Role::ADMIN;
+        return in_array($user->info()['role'], [Role::ADMIN, Role::DEVELOPER]);
     }
 }
