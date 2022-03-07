@@ -23,9 +23,9 @@ class ActionAuthorized implements Action
 {
     public function __construct(
         private Action $action,
-        private ?AccessLevel $guestAccLvl,
-        private ?AccessLevel $adminAccLvl,
-        private ?AccessLevel $developerAccLvl
+        private ?AccessLevel $guestAccLvl = null,
+        private ?AccessLevel $adminAccLvl = null,
+        private ?AccessLevel $developerAccLvl = null
     ) {
     }
 
