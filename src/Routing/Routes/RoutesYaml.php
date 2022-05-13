@@ -28,7 +28,7 @@ class RoutesYaml implements Routes
     {
         try {
             $res = $this->yamlParser::parseFile($this->path);
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             throw new Exception('Error parsing routes from yaml file');
         }
 
@@ -71,7 +71,8 @@ class RoutesYaml implements Routes
             'HEAD',
             'POST',
             'PUT',
-            'DELETE'
+            'DELETE',
+            'OPTIONS'
         ];
 
         if (!in_array($method, $validHttpMethods)) {
