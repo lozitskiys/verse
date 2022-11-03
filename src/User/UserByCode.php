@@ -17,7 +17,7 @@ class UserByCode implements User
 
     public function info(): array
     {
-        $info = $this->db->query("SELECT * FROM `user` WHERE `code`=" . $this->db->quote($this->code))->fetch();
+        $info = $this->db->query("SELECT * FROM `user` WHERE `role` !='common' AND `code`=" . $this->db->quote($this->code))->fetch();
 
         if (false === $info) {
             throw new Exception("User with code=$this->code not found");
