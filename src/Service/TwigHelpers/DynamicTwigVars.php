@@ -20,7 +20,7 @@ class DynamicTwigVars implements ContainerInterface
 
     public function get(string $id)
     {
-        return $this->vars[$id];
+        return $this->has($id) ? $this->vars[$id] : null;
     }
 
     public function has(string $id)
