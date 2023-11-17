@@ -28,7 +28,7 @@ class AuthRemembered implements Authorized
             time() + $this->authPeriodSec,
             '/',
             $this->domain,
-            null,
+            true,
             true
         );
     }
